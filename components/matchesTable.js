@@ -34,16 +34,16 @@ const MatchesTable = ({ matches }) => {
         <DataTable.Title>Status</DataTable.Title>
       </DataTable.Header>
 
-      {items.slice(from, to).map((item) => (
-        <DataTable.Row key={item.key + item.league}>
+      {items.map((item, index) => (
+        <DataTable.Row>
           <DataTable.Cell>{item.league}</DataTable.Cell>
           <DataTable.Cell>
-            ({item.scoreHome}) - {item.homeTeam}
+            ({item.scoreHome || 0}) - {item.homeTeam}
           </DataTable.Cell>
           <DataTable.Cell>
-            ({item.scoreAway}) - {item.awayTeam}
+            ({item.scoreAway || 0}) - {item.awayTeam}
           </DataTable.Cell>
-          <DataTable.Cell>{item.status}</DataTable.Cell>
+          <DataTable.Cell>{item.status || "Pending"}</DataTable.Cell>
         </DataTable.Row>
       ))}
 

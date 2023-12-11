@@ -10,8 +10,6 @@ import { usePathname } from "expo-router";
 export default function HomeLayout() {
   const [title, setTitle] = useAtom(titleAtom);
   const path = usePathname();
-  // check active route and set title
-  console.log("usePathname", path);
 
   return (
     <PaperProvider>
