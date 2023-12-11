@@ -19,6 +19,10 @@ Before you begin, ensure you have met the following requirements:
 
 ### Running dev env
 
+1. **Install Node Version Manager (NVM):**
+
+   Follow the instructions on the [official NVM GitHub repository](https://github.com/nvm-sh/nvm) to install NVM.
+
 ```bash
 nvm use
 npm install
