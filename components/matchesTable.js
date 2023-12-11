@@ -14,7 +14,12 @@ const MatchesTable = ({ matches }) => {
 
   const items = matches.map((match) => ({
     key: match.id,
-    country: match.countryName,
+    league: match.leagueName,
+    status: match.matchStatus,
+    homeTeam: match.matchHomeTeamName,
+    awayTeam: match.matchAwayTeamName,
+    scoreHome: match.matchHomeTeamScore,
+    scoreAway: match.matchAwayTeamScore,
   }));
   React.useEffect(() => {
     setPage(0);
@@ -23,12 +28,22 @@ const MatchesTable = ({ matches }) => {
   return (
     <DataTable>
       <DataTable.Header>
-        <DataTable.Title>Country</DataTable.Title>
+        <DataTable.Title>League</DataTable.Title>
+        <DataTable.Title>Home Team</DataTable.Title>
+        <DataTable.Title>Away Team</DataTable.Title>
+        <DataTable.Title>Status</DataTable.Title>
       </DataTable.Header>
 
       {items.slice(from, to).map((item) => (
-        <DataTable.Row key={item.key}>
-          <DataTable.Cell numeric>{item.country}</DataTable.Cell>
+        <DataTable.Row key={item.key + item.league}>
+          <DataTable.Cell>{item.league}</DataTable.Cell>
+          <DataTable.Cell>
+            ({item.scoreHome}) - {item.homeTeam}
+          </DataTable.Cell>
+          <DataTable.Cell>
+            ({item.scoreAway}) - {item.awayTeam}
+          </DataTable.Cell>
+          <DataTable.Cell>{item.status}</DataTable.Cell>
         </DataTable.Row>
       ))}
 

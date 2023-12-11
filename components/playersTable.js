@@ -15,7 +15,10 @@ const PlayersTable = ({ players }) => {
   const items = players.map((player) => ({
     key: player.id,
     playerName: player.player_name,
+    playerGoals: player.player_goals,
+    playerAssists: player.player_assists,
   }));
+  items.sort((a, b) => b.playerGoals - a.playerGoals);
   React.useEffect(() => {
     setPage(0);
   }, [itemsPerPage]);
@@ -24,11 +27,15 @@ const PlayersTable = ({ players }) => {
     <DataTable>
       <DataTable.Header>
         <DataTable.Title>Name</DataTable.Title>
+        <DataTable.Title>Goals</DataTable.Title>
+        <DataTable.Title>Assists</DataTable.Title>
       </DataTable.Header>
 
       {items.slice(from, to).map((item) => (
-        <DataTable.Row key={item.key}>
-          <DataTable.Cell numeric>{item.playerName}</DataTable.Cell>
+        <DataTable.Row key={item.key + item.playerName}>
+          <DataTable.Cell>{item.playerName}</DataTable.Cell>
+          <DataTable.Cell>{item.playerGoals}</DataTable.Cell>
+          <DataTable.Cell>{item.playerAssists}</DataTable.Cell>
         </DataTable.Row>
       ))}
 

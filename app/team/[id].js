@@ -1,24 +1,25 @@
-import { StatusBar } from "expo-status-bar";
-import { PaperProvider } from "react-native-paper";
+import * as React from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
-import { Appbar, Menu } from "react-native-paper";
 import { useLocalSearchParams } from "expo-router";
 import useMatches from "../../hooks/useTeamMatches";
 import usePlayers from "../../hooks/useTeamPlayers";
 import MatchesTable from "../../components/matchesTable";
 import PlayersTable from "../../components/playersTable";
+import { useAtom } from "jotai";
+import { titleAtom } from "../../store";
 
 export default function Team() {
-  const { id } = useLocalSearchParams();
+  const [title, setTitle] = useAtom(titleAtom);
+  const { id, name } = useLocalSearchParams();
   const matches = useMatches(id);
   const players = usePlayers(id);
 
-  console.log(players);
+  React.useEffect(() => {
+    setTitle(name);
+  }, [name]);
+
   return (
     <>
-      <Appbar.Header>
-        <Appbar.Content title="Select Team" />
-      </Appbar.Header>
       <ScrollView style={styles.container}>
         <MatchesTable matches={matches} />
         <PlayersTable players={players} />
